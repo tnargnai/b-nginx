@@ -1,11 +1,11 @@
-upstream webapp_backend {
+  upstream webapp_backend {
   server 192.168.33.35:8484;
   server 192.168.33.36:8484;
 }
 
 server {
   listen 80;
-  server_name webapp.sb.com;
+  server_name <%= @domain_name %>;
   keepalive_timeout 5;
 
   location / {
