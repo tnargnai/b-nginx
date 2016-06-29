@@ -5,13 +5,13 @@
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
 # Site Admin
-template '/etc/nginx/sites-available/webapp.sb.com' do
-  source 'etc/nginx/sites-available/webapp.sb.com.erb'
+template "/etc/nginx/sites-available/#{node['b-nginx']['site']['name']}" do
+  source node['b-nginx']['site']['config']
   mode 0644
   owner 'root'
   group 'root'
 end
 
-nginx_site 'webapp.sb.com' do
+nginx_site node['b-nginx']['site']['name'] do
   action :enable
 end
