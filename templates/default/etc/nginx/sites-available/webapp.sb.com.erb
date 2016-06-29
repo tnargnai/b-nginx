@@ -1,0 +1,17 @@
+upstream webapp_backend {
+  server 192.168.33.35:8484;
+  server 192.168.33.36:8484;
+}
+
+server {
+  listen 80;
+  server_name webapp.sb.com;
+  keepalive_timeout 5;
+
+  location / {
+    proxy_redirect off;
+    proxy_http_version 1.1;
+    proxy_pass http://webapp_backend;
+  }
+
+}
