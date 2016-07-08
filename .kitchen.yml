@@ -12,9 +12,30 @@ provisioner:
 
 platforms:
   - name: ubuntu-14.04
+  - name: centos-6.6
+  - name: freebsd-10.2
 
 suites:
   - name: default
     run_list:
       - recipe[b-nginx]
     attributes:
+      b-nginx:
+        site:
+          domain: "webapp.sb.com"
+
+  - name: ubuntu
+    run_list:
+      - recipe[b-nginx::deb]
+    attributes:
+      b-nginx:
+        site:
+          domain: "webapp.sb.com"
+
+  - name: rhel
+    run_list:
+      - recipe[b-nginx::rhel]
+    attributes:
+      b-nginx:
+        site:
+          domain: "webapp.sb.com"

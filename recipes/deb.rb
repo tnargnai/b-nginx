@@ -1,8 +1,11 @@
 #
 # Cookbook Name:: b-nginx
-# Recipe:: sites-webapp
+# Recipe:: deb
 #
-# Copyright (c) 2016 The Authors, All Rights Reserved.
+# Copyright (c) 2016 Barclays, All Rights Reserved.
+
+include_recipe 'apt'
+include_recipe 'nginx'
 
 # Site Admin
 template "/etc/nginx/sites-available/#{node['b-nginx']['site']['domain']}" do
@@ -11,10 +14,10 @@ template "/etc/nginx/sites-available/#{node['b-nginx']['site']['domain']}" do
   owner 'root'
   group 'root'
   variables(
-      :domain_name => node['b-nginx']['domain']
+      :domain_name => node['b-nginx']['site']['domain']
   )
 end
 
-nginx_site node['b-nginx']['site']['name'] do
+nginx_site node['b-nginx']['site']['domain'] do
   action :enable
 end
