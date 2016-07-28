@@ -9,12 +9,14 @@ include_recipe 'nginx'
 
 # Site Admin
 template "/etc/nginx/sites-available/#{node['b-nginx']['site']['domain']}" do
-  source node['b-nginx']['site']['config']
+  source 'etc/nginx/sites-available/site.conf.erb'
   mode 0644
   owner 'root'
   group 'root'
   variables(
-      :domain_name => node['b-nginx']['site']['domain']
+  :app_servers => node['b-nginx']['site']['app_servers'],
+  :backend_port => node['b-nginx']['site']['backend_port'],
+  :domain_name => node['b-nginx']['site']['domain']
   )
 end
 
