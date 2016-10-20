@@ -14,4 +14,4 @@ supports 'fedora'
 
 depends 'apt'
 depends 'yum'
-depends 'nginx', '~> 2.7.5'
+depends 'nginx', '>= 2.7.5'
